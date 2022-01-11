@@ -40,6 +40,7 @@ public class Bullet : MonoBehaviour
 
     public void Attack(Vector3 _vPos)
     {
+        this.transform.position = _vPos;
         if (player)
         {
             if (iMaxBullet < 1)
