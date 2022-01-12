@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
 
     public bool bEnemyIsPossessed = false;
     public Transform tInitialTransform;
-    public float fRange = 2.5f;
+    public float fRange = 0f;
 
     public void Initialize()
     {
@@ -54,8 +54,8 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
 
     private void CheckWall()
     {
-        LayerMask mask = LayerMask.GetMask("Wall");
-
+        LayerMask mask = LayerMask.GetMask("Wall", "Player");
+        fRange = UnityEngine.Random.Range(1, 2.5f);
         if (Physics2D.Raycast(transform.position, movDir, fRange, mask.value))
         {
             movDir *= -1;
@@ -69,9 +69,12 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
         //currRot.Normalize();
         currRot = currRot.normalized;
         float fRotZ = Mathf.Atan2(currRot.y, currRot.x) * Mathf.Rad2Deg;
+
         if (fRotZ <= 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, fRotZ * -1);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            //transform.rotation = Quaternion.Euler(0, 0, fRotZ * -1);
+
         }
         else { transform.rotation = Quaternion.Euler(0, 0, fRotZ); }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -83,15 +86,15 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
     public void possess()
     {
         bEnemyIsPossessed = true;
-        Debug.Log("Enemy is Possessed");
+        //Debug.Log("Enemy is Possessed");
     }
 
     public void unpossess()
     {
         bEnemyIsPossessed = false;
         this.enabled = true;
-        this.gameObject.transform.rotation = tInitialTransform.rotation;
-        Debug.Log("Enemy is Unpossessed");
+        this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+       // Debug.Log("Enemy is Unpossessed");
 
     }
 

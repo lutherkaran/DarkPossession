@@ -64,7 +64,7 @@ public class EnemyManager : IUpdate
                         }
                         else
                         {
-                            Debug.Log("P L A Y E R   A L I V E");
+                            // Debug.Log("P L A Y E R   A L I V E");
                         }
                     }
                 }
@@ -78,15 +78,19 @@ public class EnemyManager : IUpdate
                         }
                         else
                         {
-                            Debug.Log("P L A Y E R   A L I V E");
+                            // Debug.Log("P L A Y E R   A L I V E");
                         }
                     }
-                    Debug.Log("ENEMY IS POSSESSED");
+                    //Debug.Log("ENEMY IS POSSESSED");
                 }
             }
-            else { Debug.Log("E N E M Y   D I E D"); }
+            else
+            {// Debug.Log("E N E M Y   D I E D");
+            }
         }
-        else { Debug.Log("Enemy Script is disabled"); }
+        else
+        { //Debug.Log("Enemy Script is disabled");
+        }
 
     }
 }

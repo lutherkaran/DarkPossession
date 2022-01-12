@@ -100,7 +100,7 @@ public class Player : PossessionController, IFeatures, IPossessable
             {
                 if (bPlayerIsPossessed == true)
                 {
-                    Debug.Log("POSSESSING ENEMY....");
+                    //Debug.Log("POSSESSING ENEMY....");
                     IPossessable IenemyPossessable = EnemyManager.instance.gEnemy.GetComponent<IPossessable>();
 
                     if (IenemyPossessable != null)
@@ -111,11 +111,11 @@ public class Player : PossessionController, IFeatures, IPossessable
                 }
                 else if (bPlayerIsPossessed == false)
                 {
-                    Debug.Log("POSSESSING PLAYER....");
+                    //Debug.Log("POSSESSING PLAYER....");
                     IPossessable IplayerPossessable = this.GetComponent<IPossessable>();
                     if (IplayerPossessable != null)
                     {
-                        Debug.Log("PLAYER POSSESSED....");
+                      //  Debug.Log("PLAYER POSSESSED....");
                         possess(IplayerPossessable);
                     }
                     bPlayerIsPossessed = true;
