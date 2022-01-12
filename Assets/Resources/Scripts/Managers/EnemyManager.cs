@@ -53,36 +53,19 @@ public class EnemyManager : IUpdate
         {
             if (gEnemy.gameObject != null)
             {
-                if (!gEnemy.bEnemyIsPossessed)
+                if (BulletManager.instance.bullet.go != null)
                 {
+                    if (BulletManager.instance.bullet.BulletHit())
+                    {
 
-                    if (BulletManager.instance.bullet.go != null)
+                        //Debug.Log("HIT");
+                    }
+                    else
                     {
-                        if (BulletManager.instance.bullet.BulletHit())
-                        {
-                            Debug.Log("P L A Y E R   D I E D");
-                        }
-                        else
-                        {
-                            // Debug.Log("P L A Y E R   A L I V E");
-                        }
+                        // Debug.Log("P L A Y E R   A L I V E");
                     }
                 }
-                else
-                {
-                    if (BulletManager.instance.bullet.go != null)
-                    {
-                        if (BulletManager.instance.bullet.BulletHit())
-                        {
-                            Debug.Log("P L A Y E R   D I E D");
-                        }
-                        else
-                        {
-                            // Debug.Log("P L A Y E R   A L I V E");
-                        }
-                    }
-                    //Debug.Log("ENEMY IS POSSESSED");
-                }
+
             }
             else
             {// Debug.Log("E N E M Y   D I E D");

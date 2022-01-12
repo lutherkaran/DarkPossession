@@ -65,16 +65,13 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
 
     private void LookAt()
     {
-        Vector2 currRot = /*player.gameObject.transform.position*/ Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.gameObject.transform.position;
-        //currRot.Normalize();
+        Vector2 currRot = Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.gameObject.transform.position;
         currRot = currRot.normalized;
         float fRotZ = Mathf.Atan2(currRot.y, currRot.x) * Mathf.Rad2Deg;
 
         if (fRotZ <= 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            //transform.rotation = Quaternion.Euler(0, 0, fRotZ * -1);
-
         }
         else { transform.rotation = Quaternion.Euler(0, 0, fRotZ); }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -86,7 +83,6 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
     public void possess()
     {
         bEnemyIsPossessed = true;
-        //Debug.Log("Enemy is Possessed");
     }
 
     public void unpossess()
@@ -94,8 +90,6 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
         bEnemyIsPossessed = false;
         this.enabled = true;
         this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-       // Debug.Log("Enemy is Unpossessed");
-
     }
 
     public void Move(float _deltaTime)
@@ -108,4 +102,5 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
     {
 
     }
+
 }

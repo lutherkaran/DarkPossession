@@ -6,6 +6,8 @@ public class Trigger : MonoBehaviour
 {
     public bool bIsPlayerCollided = false;
     public Enemy enemy;
+
+
     private void Start()
     {
     }

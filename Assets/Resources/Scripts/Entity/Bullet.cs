@@ -56,6 +56,7 @@ public class Bullet : MonoBehaviour
                     go.SetActive(true);
                     go.GetComponent<Rigidbody2D>().AddForce((player.gameObject.transform.position - _vPos).normalized * Time.fixedDeltaTime * fBulletSpeed);
                 }
+                else { bIsFired = false; }
             }
         }
         this.gameObject.transform.SetParent(null);
@@ -83,25 +84,30 @@ public class Bullet : MonoBehaviour
         this.gameObject.transform.SetParent(EnemyManager.instance.gEnemy.transform);
         vBulletPos = EnemyManager.instance.gEnemy.transform.position;
         this.gameObject.transform.position = vBulletPos;
+        bIsFired = false;
         iMaxBullet = 0;
     }
 
     public void FireBullet(Vector2 _currRot, Vector2 _vPos)
     {
-        if (go != null)
+        if (!bIsFired)
         {
-            ResetBulletPosition();
-            go.SetActive(true);
-            go.gameObject.GetComponent<Rigidbody2D>().AddForce(_currRot * Time.fixedDeltaTime * fBulletSpeed);
-            bIsFired = true;
+            if (go != null)
+            {
+                ResetBulletPosition();
+                go.SetActive(true);
+                go.gameObject.GetComponent<Rigidbody2D>().AddForce(_currRot * Time.fixedDeltaTime * fBulletSpeed);
+                bIsFired = true;
+            }
+
+            else
+            {
+                BulletManager.instance.BulletInstantiation(_vPos);
+                go.GetComponent<Rigidbody2D>().AddForce(_currRot * Time.fixedDeltaTime * fBulletSpeed);
+                bIsFired = true;
+            }
         }
-        else
-        {
-            BulletManager.instance.BulletInstantiation(_vPos);
-            //GameObject.Instantiate(go, _vPos/*this.transform.position*/, Quaternion.identity);
-            go.GetComponent<Rigidbody2D>().AddForce(_currRot * Time.fixedDeltaTime * fBulletSpeed);
-            bIsFired = true;
-        }
+
         this.gameObject.transform.SetParent(null);
     }
 }
