@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IFeatures, IPossessable
+public class Enemy : MonoBehaviour, IFeatures, IPossessable,IHittable
 {
     Player player;
     Rigidbody2D enemyRb;
@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
     public bool bEnemyIsPossessed = false;
     public Transform tInitialTransform;
     public float fRange = 0f;
+    float fHealth = 100f;
 
     public void Initialize()
     {
@@ -103,4 +104,9 @@ public class Enemy : MonoBehaviour, IFeatures, IPossessable
 
     }
 
+    public void Damage(float _fDamage)
+    {
+        fHealth -= _fDamage;
+        Debug.Log("ENEMY HEALTH: " + fHealth);
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : PossessionController, IFeatures, IPossessable
+public class Player : PossessionController, IFeatures, IPossessable, IHittable
 {
 
     float fSpeed = 5f;
@@ -14,6 +14,7 @@ public class Player : PossessionController, IFeatures, IPossessable
     bool bPlayerIsPossessed = false;
     public bool bPlayerIsAlive = false;
     private bool bDoJump = false;
+    public float fHealth = 100;
 
     public Player()
     {
@@ -134,5 +135,11 @@ public class Player : PossessionController, IFeatures, IPossessable
         {
             bPlayerCanJump = true;
         }
+    }
+
+    public void Damage(float _fDamage)
+    {
+        fHealth-=_fDamage;
+        Debug.Log(fHealth);
     }
 }

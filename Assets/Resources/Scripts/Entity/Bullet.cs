@@ -62,19 +62,39 @@ public class Bullet : MonoBehaviour
         this.gameObject.transform.SetParent(null);
     }
 
-    public bool BulletHit()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        LayerMask mask = LayerMask.GetMask("Wall", "Player");
+        switch (collision.collider.gameObject.tag)
+        {
+            case "Player":
+                IHittable hitPlayer = collision.collider.gameObject.GetComponent<IHittable>();
+                if (hitPlayer != null)
+                {
+                    float _fDamage = 50f;
+                    hitPlayer.Damage(_fDamage);
+                    ResetBulletPosition();
+                }
+                break;
+            case "Enemy":
+                IHittable hitEnemy = collision.collider.gameObject.GetComponent<IHittable>();
+                if (hitEnemy != null)
+                {
+                    float _fDamage = 50f;
+                    hitEnemy.Damage(_fDamage);
+                    ResetBulletPosition();
+                }
+                break;
 
-        if (go.GetComponent<Collider2D>().IsTouchingLayers(mask.value))
-        {
-            ResetBulletPosition();
-            return true;
-        }
-        else
-        {
-            return false;
+            case "Wall":
+
+                LayerMask mask = LayerMask.GetMask("Wall");
+
+                if (go.GetComponent<Collider2D>().IsTouchingLayers(mask.value))
+                {
+                    ResetBulletPosition();
+                }
+                break;
         }
     }
 

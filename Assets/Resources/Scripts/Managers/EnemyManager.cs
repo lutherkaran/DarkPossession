@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class EnemyManager : IUpdate
 {
+
     private static EnemyManager Instance;
     private EnemyManager() { }
     public static EnemyManager instance { get { return Instance ?? (Instance = new EnemyManager()); } }
-
     public Vector2 vStartPos;
     public Enemy gEnemy;
     Transform tEnemyParent;
     bool bEnemyIsAlive = false;
+    public enum enemyType { Boomer, Starter };
+    Dictionary<enemyType, GameObject> dEnemyPrefabDict;
 
     public void Initialize()
     {
@@ -53,22 +55,10 @@ public class EnemyManager : IUpdate
         {
             if (gEnemy.gameObject != null)
             {
-                if (BulletManager.instance.bullet.go != null)
-                {
-                    if (BulletManager.instance.bullet.BulletHit())
-                    {
-
-                        //Debug.Log("HIT");
-                    }
-                    else
-                    {
-                        // Debug.Log("P L A Y E R   A L I V E");
-                    }
-                }
-
+                //
             }
             else
-            {// Debug.Log("E N E M Y   D I E D");
+            {//Debug.Log("E N E M Y   D I E D");
             }
         }
         else
